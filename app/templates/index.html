@@ -1,53 +1,296 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Détection Fuites d'Eau</title>
-    <!-- Tailwind CSS via CDN -->
+    <title>AquaLeak AI - Détection Intelligente</title>
     <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-slate-100 text-slate-800">
+    <!-- Police Google : Inter pour un look moderne -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            dark: '#0f172a',     // Slate 900
+                            primary: '#06b6d4',  // Cyan 500
+                            secondary: '#3b82f6' // Blue 500
+                        }
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
 
-    <!-- Navbar -->
-    <nav class="bg-blue-600 p-4 text-white shadow-md">
-        <div class="container mx-auto font-bold text-xl">
-            💧 WaterGuard - Détection Urbaine
+    <style>
+        /* Effet de grille en arrière-plan comme sur les images */
+        .bg-grid-pattern {
+            background-size: 40px 40px;
+            background-image: linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+            mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+        }
+        
+        /* Glow effect derrière le titre */
+        .glow-bg {
+            background: radial-gradient(circle, rgba(6,182,212,0.15) 0%, rgba(15,23,42,0) 70%);
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-white font-sans antialiased overflow-x-hidden selection:bg-cyan-500 selection:text-white">
+
+    <!-- NAVBAR (Glassmorphism) -->
+    <nav class="fixed w-full z-50 top-0 transition-all duration-300 bg-slate-900/80 backdrop-blur-md border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer group">
+                    <svg class="w-8 h-8 text-cyan-400 group-hover:rotate-12 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+                    </svg>
+                    <span class="font-bold text-xl tracking-tight text-white group-hover:text-cyan-400 transition-colors">AquaLeak AI</span>
+                </div>
+
+                <!-- Liens Desktop -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#" class="text-slate-300 hover:text-cyan-400 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300">Fonctionnalités</a>
+                        <a href="#" class="text-slate-300 hover:text-cyan-400 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300">Documentation</a>
+                        <a href="#" class="text-slate-300 hover:text-cyan-400 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300">Contact</a>
+                    </div>
+                </div>
+
+                <!-- Boutons -->
+                <div class="hidden md:flex items-center gap-4">
+                    <a href="#" class="text-slate-300 hover:text-white font-medium text-sm transition-colors">Connexion</a>
+                    <a href="#" class="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white px-5 py-2.5 rounded-full font-medium shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40 transform hover:-translate-y-0.5 transition-all duration-300">
+                        Commencer
+                    </a>
+                </div>
+            </div>
         </div>
     </nav>
 
-    <!-- Contenu Principal -->
-    <div class="container mx-auto mt-10 p-4">
-        <h1 class="text-3xl font-bold mb-6">Tableau de Bord</h1>
+    <!-- HERO SECTION -->
+    <div class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+        <!-- Background Grid & Glow -->
+        <div class="absolute inset-0 bg-grid-pattern z-0 pointer-events-none"></div>
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full glow-bg z-0 pointer-events-none"></div>
 
-        <!-- Cartes de statut -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <!-- Carte 1 -->
-            <div class="bg-white p-6 rounded-lg shadow border-l-4 border-green-500">
-                <h2 class="text-gray-500 uppercase text-sm">État du Système</h2>
-                <p class="text-2xl font-bold">{{ system_status }}</p>
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            
+            <!-- Badge -->
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-800/50 border border-slate-700 backdrop-blur-sm mb-8 animate-float">
+                <svg class="w-4 h-4 text-cyan-400" fill="currentColor" viewBox="0 0 20 20"><path d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z"></path></svg>
+                <span class="text-xs font-semibold text-cyan-300 uppercase tracking-wide">Propulsé par LSTM & IA</span>
             </div>
 
-            <!-- Carte 2 -->
-            <div class="bg-white p-6 rounded-lg shadow border-l-4 border-blue-500">
-                <h2 class="text-gray-500 uppercase text-sm">Pression Moyenne</h2>
-                <p class="text-2xl font-bold">{{ pressure }}</p>
-            </div>
+            <!-- Titre Principal -->
+            <h1 class="text-5xl md:text-7xl font-extrabold text-white tracking-tight mb-6 leading-tight">
+                Détection Intelligente des <br>
+                <span class="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600">Fuites d'Eau</span>
+            </h1>
 
-            <!-- Carte 3 -->
-            <div class="bg-white p-6 rounded-lg shadow border-l-4 border-red-500">
-                <h2 class="text-gray-500 uppercase text-sm">Fuites Détectées</h2>
-                <p class="text-2xl font-bold text-red-600">{{ leaks_detected }}</p>
+            <p class="mt-4 max-w-2xl mx-auto text-xl text-slate-400 mb-10">
+                Solution avancée pour la surveillance en temps réel des réseaux urbains. Prédisez et prévenez les fuites avant qu'elles ne surviennent grâce au Deep Learning.
+            </p>
+
+            <!-- Boutons CTA -->
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#" class="group relative px-8 py-4 bg-cyan-500 rounded-lg text-white font-bold shadow-lg shadow-cyan-500/30 overflow-hidden transition-all hover:scale-105 duration-300">
+                    <div class="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-[shimmer_1s_infinite]"></div>
+                    Démarrer l'analyse →
+                </a>
+                <a href="#" class="px-8 py-4 rounded-lg border border-slate-700 text-slate-300 font-semibold hover:bg-slate-800 hover:text-white hover:border-slate-600 transition-all duration-300">
+                    Voir la documentation
+                </a>
             </div>
         </div>
-        
-        <div class="mt-8 bg-white p-6 rounded-lg shadow">
-            <h3 class="text-xl font-bold mb-4">Actions</h3>
-            <button class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                Lancer une analyse
-            </button>
+
+        <!-- STATS CARDS (Floating) -->
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-20">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                
+                <!-- Card 1 -->
+                <div class="bg-slate-800/50 backdrop-blur-md border border-slate-700 p-6 rounded-2xl hover:bg-slate-800 hover:border-cyan-500/50 hover:shadow-lg hover:shadow-cyan-500/10 hover:-translate-y-2 transition-all duration-300 group">
+                    <div class="w-12 h-12 rounded-lg bg-slate-700 flex items-center justify-center mb-4 group-hover:bg-cyan-500/20 transition-colors">
+                        <svg class="w-6 h-6 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </div>
+                    <h3 class="text-3xl font-bold text-white mb-1">99.2%</h3>
+                    <p class="text-sm text-slate-400">Précision du modèle</p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-slate-800/50 backdrop-blur-md border border-slate-700 p-6 rounded-2xl hover:bg-slate-800 hover:border-blue-500/50 hover:shadow-lg hover:shadow-blue-500/10 hover:-translate-y-2 transition-all duration-300 group">
+                    <div class="w-12 h-12 rounded-lg bg-slate-700 flex items-center justify-center mb-4 group-hover:bg-blue-500/20 transition-colors">
+                        <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    </div>
+                    <h3 class="text-3xl font-bold text-white mb-1">&lt; 1s</h3>
+                    <p class="text-sm text-slate-400">Temps de réponse</p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-slate-800/50 backdrop-blur-md border border-slate-700 p-6 rounded-2xl hover:bg-slate-800 hover:border-purple-500/50 hover:shadow-lg hover:shadow-purple-500/10 hover:-translate-y-2 transition-all duration-300 group">
+                    <div class="w-12 h-12 rounded-lg bg-slate-700 flex items-center justify-center mb-4 group-hover:bg-purple-500/20 transition-colors">
+                        <svg class="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                    </div>
+                    <h3 class="text-3xl font-bold text-white mb-1">24/7</h3>
+                    <p class="text-sm text-slate-400">Monitoring continu</p>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="bg-slate-800/50 backdrop-blur-md border border-slate-700 p-6 rounded-2xl hover:bg-slate-800 hover:border-emerald-500/50 hover:shadow-lg hover:shadow-emerald-500/10 hover:-translate-y-2 transition-all duration-300 group">
+                    <div class="w-12 h-12 rounded-lg bg-slate-700 flex items-center justify-center mb-4 group-hover:bg-emerald-500/20 transition-colors">
+                        <svg class="w-6 h-6 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
+                    </div>
+                    <h3 class="text-3xl font-bold text-white mb-1">LSTM</h3>
+                    <p class="text-sm text-slate-400">Réseau de Neurones</p>
+                </div>
+            </div>
         </div>
     </div>
 
+    <!-- FEATURES SECTION -->
+    <section class="bg-slate-900 py-20 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Fonctionnalités <span class="text-cyan-400">Puissantes</span></h2>
+                <p class="text-slate-400 max-w-2xl mx-auto">
+                    Une suite complète d'outils pour la détection et la prévention des fuites d'eau dans les réseaux modernes.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Feature 1 -->
+                <div class="bg-white p-8 rounded-2xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 group cursor-pointer border border-transparent hover:border-cyan-200">
+                    <div class="w-14 h-14 bg-cyan-100 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <svg class="w-8 h-8 text-cyan-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Modèle LSTM Avancé</h3>
+                    <p class="text-slate-600 leading-relaxed text-sm">
+                        Réseau de neurones récurrents entraîné sur des données historiques pour détecter les anomalies fines.
+                    </p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="bg-white p-8 rounded-2xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 group cursor-pointer border border-transparent hover:border-blue-200">
+                    <div class="w-14 h-14 bg-blue-100 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Analyse Temps Réel</h3>
+                    <p class="text-slate-600 leading-relaxed text-sm">
+                        Surveillance continue du débit, de la pression et de la demande pour chaque nœud du réseau.
+                    </p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="bg-white p-8 rounded-2xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 group cursor-pointer border border-transparent hover:border-purple-200">
+                    <div class="w-14 h-14 bg-purple-100 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Alertes Instantanées</h3>
+                    <p class="text-slate-600 leading-relaxed text-sm">
+                        Notifications automatiques et hiérarchisées dès la détection d'une potentielle fuite critique.
+                    </p>
+                </div>
+
+                 <!-- Feature 4 -->
+                 <div class="bg-white p-8 rounded-2xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 group cursor-pointer border border-transparent hover:border-emerald-200">
+                    <div class="w-14 h-14 bg-emerald-100 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <svg class="w-8 h-8 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Import CSV & API</h3>
+                    <p class="text-slate-600 leading-relaxed text-sm">
+                        Importez vos datasets historiques ou connectez vos capteurs IoT directement via notre API Fast.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CALL TO ACTION (CTA) -->
+    <section class="py-24 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-slate-800 to-slate-900"></div>
+        <!-- Decorative blobs -->
+        <div class="absolute top-0 right-0 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+        <div class="absolute bottom-0 left-0 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
+
+        <div class="relative max-w-4xl mx-auto text-center px-4">
+            <h2 class="text-4xl md:text-5xl font-bold text-white mb-6">Prêt à optimiser votre <span class="text-cyan-400">réseau d'eau ?</span></h2>
+            <p class="text-lg text-slate-300 mb-10">
+                Commencez dès maintenant à détecter les fuites avant qu'elles ne causent des dégâts. Inscription gratuite, résultats immédiats.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <button class="bg-cyan-500 hover:bg-cyan-400 text-white font-bold py-4 px-8 rounded-lg shadow-lg shadow-cyan-500/25 transform hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2">
+                    Créer un compte gratuit
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                </button>
+                <button class="bg-transparent border border-slate-600 text-white font-bold py-4 px-8 rounded-lg hover:bg-slate-800 hover:border-slate-500 transition-all duration-300 flex items-center justify-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                    Nous contacter
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-950 border-t border-slate-900 pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                <div class="col-span-1 md:col-span-2">
+                    <div class="flex items-center gap-2 mb-4">
+                        <svg class="w-8 h-8 text-cyan-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" /></svg>
+                        <span class="text-2xl font-bold text-white">AquaLeak AI</span>
+                    </div>
+                    <p class="text-slate-400 text-sm leading-relaxed max-w-sm">
+                        Solution intelligente de détection de fuites d'eau pour les réseaux de distribution urbains. Propulsé par l'apprentissage profond LSTM et FastAPI.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="text-white font-bold mb-4 uppercase text-sm tracking-wider">Produit</h4>
+                    <ul class="space-y-2 text-slate-400 text-sm">
+                        <li><a href="#" class="hover:text-cyan-400 transition-colors">Fonctionnalités</a></li>
+                        <li><a href="#" class="hover:text-cyan-400 transition-colors">Documentation</a></li>
+                        <li><a href="#" class="hover:text-cyan-400 transition-colors">Tableau de bord</a></li>
+                        <li><a href="#" class="hover:text-cyan-400 transition-colors">API Status</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold mb-4 uppercase text-sm tracking-wider">Légal</h4>
+                    <ul class="space-y-2 text-slate-400 text-sm">
+                        <li><a href="#" class="hover:text-cyan-400 transition-colors">Confidentialité</a></li>
+                        <li><a href="#" class="hover:text-cyan-400 transition-colors">Conditions d'utilisation</a></li>
+                        <li><a href="#" class="hover:text-cyan-400 transition-colors">Mentions légales</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-slate-900 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-slate-500 text-sm text-center md:text-left">© 2024 AquaLeak AI. Tous droits réservés.</p>
+                <div class="flex space-x-6">
+                    <!-- Social Icons (Placeholder) -->
+                    <a href="#" class="text-slate-500 hover:text-white transition-colors"><svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+                    <a href="#" class="text-slate-500 hover:text-white transition-colors"><svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg></a>
+                </div>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
