@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation - AquaLeak AI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: { 
+                        slate: { 850: '#151e2e', 900: '#0f172a' },
+                        cyan: { 500: '#06b6d4', 600: '#0891b2' }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-slate-50 font-sans text-slate-800 h-screen flex overflow-hidden">
+
+    <!-- SIDEBAR (Barre Latérale) -->
+    <!-- J'ai ajouté 'transition-all duration-300' pour l'animation fluide -->
+    <aside id="sidebar" class="w-64 bg-slate-900 text-white flex flex-col flex-shrink-0 transition-all duration-300 border-r border-slate-800">
+        
+        <!-- HEADER SIDEBAR : Logo + Bouton Toggle -->
+        <div class="h-20 flex items-center justify-between px-4 border-b border-slate-800 overflow-hidden">
+            <div class="flex items-center">
+                <!-- Logo Icône (Toujours visible) -->
+                <svg class="w-8 h-8 text-cyan-500 flex-shrink-0 transition-all duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 10C7.5 10 4.5 12.5 4.5 14.5C4.5 16.1569 5.84315 17.5 7.5 17.5C9.15685 17.5 10.5 16.1569 10.5 14.5C10.5 12.5 7.5 10 7.5 10Z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M16 5C16 5 11.5 9 11.5 13.5C11.5 15.9853 13.5147 18 16 18C18.4853 18 20.5 15.9853 20.5 13.5C20.5 9 16 5 16 5Z" />
+                </svg>
+                <!-- Logo Texte (Caché si menu fermé) -->
+                <span class="sidebar-text font-bold text-lg tracking-tight ml-3 whitespace-nowrap opacity-100 transition-opacity duration-200">AquaLeak AI</span>
+            </div>
+            
+            <!-- Bouton pour fermer/ouvrir le menu -->
+            <button onclick="toggleSidebar()" class="text-slate-400 hover:text-white focus:outline-none p-1 rounded-md hover:bg-slate-800 transition-colors">
+                <svg id="toggle-icon" class="w-6 h-6 transform transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7" />
+                </svg>
+            </button>
+        </div>
+
+        <!-- Menu Links -->
+        <nav class="flex-1 px-3 py-6 space-y-2 overflow-y-auto overflow-x-hidden">
+            
+            <!-- Documentation (Active) -->
+            <a href="/documentation" class="flex items-center px-3 py-3 text-white bg-gradient-to-r from-cyan-600 to-cyan-700 shadow-md rounded-lg group overflow-hidden" title="Documentation">
+                <div class="min-w-[20px] flex justify-center">
+                    <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                </div>
+                <span class="sidebar-text ml-3 whitespace-nowrap transition-opacity duration-200">Documentation</span>
+            </a>
+
+            <!-- Dashboard Link -->
+            <a href="/" class="flex items-center px-3 py-3 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-colors group overflow-hidden" title="Tableau de bord">
+                <div class="min-w-[20px] flex justify-center">
+                    <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                    </svg>
+                </div>
+                <span class="sidebar-text ml-3 whitespace-nowrap transition-opacity duration-200">Tableau de bord</span>
+            </a>
+
+            <!-- Predictions Link -->
+            <a href="#" class="flex items-center px-3 py-3 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-colors group overflow-hidden" title="Prédictions">
+                <div class="min-w-[20px] flex justify-center">
+                    <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
+                    </svg>
+                </div>
+                <span class="sidebar-text ml-3 whitespace-nowrap transition-opacity duration-200">Prédictions</span>
+            </a>
+        </nav>
+
+        <!-- User Profile (Bottom) -->
+        <div class="p-4 border-t border-slate-800 overflow-hidden">
+            <div class="flex items-center">
+                <div id="user-initials" class="w-10 h-10 min-w-[2.5rem] rounded-full bg-cyan-900 flex items-center justify-center text-cyan-400 font-bold uppercase ring-2 ring-transparent group-hover:ring-cyan-500 transition-all">
+                    AU
+                </div>
+                <div class="sidebar-text ml-3 overflow-hidden transition-opacity duration-200">
+                    <p id="user-name" class="text-sm font-medium text-white truncate">Admin User</p>
+                    <p id="user-email" class="text-xs text-slate-500 truncate max-w-[140px]">admin@aqualeak.com</p>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- MAIN CONTENT (Zone Principale) -->
+    <main class="flex-1 flex flex-col overflow-hidden relative bg-slate-50">
+        <!-- Top Header inside content -->
+        <header class="bg-white border-b border-slate-200 h-20 flex items-center justify-between px-8 z-10 sticky top-0">
+            <div>
+                <a href="/" class="text-sm text-slate-500 hover:text-cyan-600 mb-1 flex items-center gap-1">
+                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
+                    Retour à l'accueil
+                </a>
+                <h1 class="text-2xl font-bold text-slate-800">Documentation</h1>
+            </div>
+            <div class="flex gap-3">
+                <button class="px-4 py-2 bg-slate-100 text-slate-600 rounded-md text-sm font-medium hover:bg-slate-200 transition">Support</button>
+                <button onclick="downloadPDF()" class="px-4 py-2 bg-cyan-600 text-white rounded-md text-sm font-medium hover:bg-cyan-500 shadow-sm transition flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                    Télécharger PDF
+                </button>
+            </div>
+        </header>
+
+        <!-- Scrollable Content Area -->
+        <div id="content-to-print" class="flex-1 overflow-y-auto p-8 scroll-smooth">
+            <div class="max-w-5xl mx-auto space-y-8 pb-10">
+                
+                <!-- Description -->
+                <p class="text-slate-500 text-lg">
+                    Guide complet pour utiliser AquaLeak AI et comprendre le fonctionnement du système de détection de fuites.
+                </p>
+
+                <!-- Sommaire -->
+                <div data-html2pdf-ignore="true" class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex flex-wrap gap-3">
+                    <span class="font-semibold text-slate-800 py-2 px-2">Sommaire :</span>
+                    <a href="#intro" class="flex items-center gap-2 px-4 py-2 bg-slate-100 hover:bg-cyan-50 text-slate-600 hover:text-cyan-700 rounded-lg text-sm font-medium transition-colors">Introduction</a>
+                    <a href="#lstm" class="flex items-center gap-2 px-4 py-2 bg-slate-100 hover:bg-cyan-50 text-slate-600 hover:text-cyan-700 rounded-lg text-sm font-medium transition-colors">Modèle LSTM</a>
+                    <a href="#data" class="flex items-center gap-2 px-4 py-2 bg-slate-100 hover:bg-cyan-50 text-slate-600 hover:text-cyan-700 rounded-lg text-sm font-medium transition-colors">Format Données</a>
+                    <a href="#manual" class="flex items-center gap-2 px-4 py-2 bg-slate-100 hover:bg-cyan-50 text-slate-600 hover:text-cyan-700 rounded-lg text-sm font-medium transition-colors">Prédiction</a>
+                </div>
+
+                <!-- CONTENU (Raccourci pour l'exemple, identique à votre précédent code) -->
+                <div id="lstm" class="bg-white rounded-2xl border border-slate-200 shadow-sm p-8 scroll-mt-24 break-inside-avoid">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-10 h-10 rounded-lg bg-cyan-100 flex items-center justify-center text-cyan-600">
+                            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>
+                        </div>
+                        <h2 class="text-2xl font-bold text-slate-800">Modèle LSTM</h2>
+                    </div>
+                    <div class="space-y-4 text-slate-600">
+                        <p>Le modèle LSTM (Long Short-Term Memory) est un type de réseau de neurones récurrents particulièrement adapté à l'analyse de séries temporelles.</p>
+                        <h3 class="font-bold text-slate-800 mt-4">Architecture :</h3>
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li>Couche d'entrée : 4 features (débit, pression, demande, niveau)</li>
+                            <li>2 couches LSTM avec 128 et 64 unités</li>
+                        </ul>
+                    </div>
+                </div>
+
+                 <div id="data" class="bg-white rounded-2xl border border-slate-200 shadow-sm p-8 scroll-mt-24 break-inside-avoid">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-10 h-10 rounded-lg bg-cyan-100 flex items-center justify-center text-cyan-600">
+                            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" /></svg>
+                        </div>
+                        <h2 class="text-2xl font-bold text-slate-800">Format des Données</h2>
+                    </div>
+                    <div class="space-y-4 text-slate-600">
+                        <p>Les données d'entrée doivent respecter le format CSV standard.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- LOGIQUE JAVASCRIPT POUR LE MENU -->
+    <script>
+        // --- 1. Gestion du Menu (Sidebar Toggle) ---
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const toggleIcon = document.getElementById('toggle-icon');
+            const texts = document.querySelectorAll('.sidebar-text');
+            const logoArea = document.querySelector('.logo-area');
+
+            // Vérifie l'état actuel (si width est 64 ou 20)
+            const isExpanded = sidebar.classList.contains('w-64');
+
+            if (isExpanded) {
+                // FERMER LE MENU
+                sidebar.classList.remove('w-64');
+                sidebar.classList.add('w-20');
+                
+                // Cacher les textes
+                texts.forEach(text => {
+                    text.classList.add('opacity-0', 'w-0', 'hidden');
+                    text.classList.remove('opacity-100');
+                });
+
+                // Tourner l'icône de toggle
+                toggleIcon.classList.add('rotate-180');
+
+            } else {
+                // OUVRIR LE MENU
+                sidebar.classList.remove('w-20');
+                sidebar.classList.add('w-64');
+
+                // Montrer les textes
+                texts.forEach(text => {
+                    text.classList.remove('hidden');
+                    // Petit délai pour permettre l'animation d'opacité
+                    setTimeout(() => {
+                        text.classList.remove('opacity-0', 'w-0');
+                        text.classList.add('opacity-100');
+                    }, 50);
+                });
+
+                // Remettre l'icône droite
+                toggleIcon.classList.remove('rotate-180');
+            }
+        }
+
+        // --- 2. PDF et Utilisateur (Code existant) ---
+        function downloadPDF() {
+            const element = document.getElementById('content-to-print');
+            const opt = {
+                margin: 10,
+                filename: 'AquaLeak_Documentation.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+            html2pdf().set(opt).from(element).save();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const userEmail = localStorage.getItem('user_email');
+            if (userEmail) {
+                const emailEl = document.getElementById('user-email');
+                const nameEl = document.getElementById('user-name');
+                const initialsEl = document.getElementById('user-initials');
+
+                emailEl.textContent = userEmail;
+                const namePart = userEmail.split('@')[0];
+                const displayName = namePart.split('.').map(n => n.charAt(0).toUpperCase() + n.slice(1)).join(' ');
+                nameEl.textContent = displayName;
+                const initials = displayName.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+                initialsEl.textContent = initials;
+            }
+        });
+    </script>
+
+</body>
+</html>
