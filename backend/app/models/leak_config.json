@@ -1,0 +1,135 @@
+{
+    "pipe_to_id": {
+        "p31": 0,
+        "p158": 1,
+        "p183": 2,
+        "p232": 3,
+        "p257": 4,
+        "p369": 5,
+        "p427": 6,
+        "p461": 7,
+        "p538": 8,
+        "p628": 9,
+        "p654": 10,
+        "p673": 11,
+        "p810": 12,
+        "p866": 13
+    },
+    "id_to_pipe": {
+        "0": "p31",
+        "1": "p158",
+        "2": "p183",
+        "3": "p232",
+        "4": "p257",
+        "5": "p369",
+        "6": "p427",
+        "7": "p461",
+        "8": "p538",
+        "9": "p628",
+        "10": "p654",
+        "11": "p673",
+        "12": "p810",
+        "13": "p866"
+    },
+    "threshold": 0.944,
+    "topology": {
+        "p31": {
+            "nodes": [
+                "n40",
+                "n42"
+            ],
+            "zone": "Quartier Nord-Ouest"
+        },
+        "p158": {
+            "nodes": [
+                "n232",
+                "n235"
+            ],
+            "zone": "Zone Ouest (R2)"
+        },
+        "p183": {
+            "nodes": [
+                "n141",
+                "n229"
+            ],
+            "zone": "Centre-Ouest"
+        },
+        "p232": {
+            "nodes": [
+                "n333",
+                "n334"
+            ],
+            "zone": "Zone Entr\u00e9e / Pompage"
+        },
+        "p257": {
+            "nodes": [
+                "n342",
+                "n288"
+            ],
+            "zone": "Zone Centrale"
+        },
+        "p369": {
+            "nodes": [
+                "n370",
+                "n371"
+            ],
+            "zone": "Quartier Nord-Est"
+        },
+        "p427": {
+            "nodes": [
+                "n425",
+                "n427"
+            ],
+            "zone": "Secteur A"
+        },
+        "p461": {
+            "nodes": [
+                "n106",
+                "n484"
+            ],
+            "zone": "Secteur B"
+        },
+        "p538": {
+            "nodes": [
+                "n537",
+                "n539"
+            ],
+            "zone": "Secteur Est"
+        },
+        "p628": {
+            "nodes": [
+                "n627",
+                "n628"
+            ],
+            "zone": "Secteur Sud-Ouest"
+        },
+        "p654": {
+            "nodes": [
+                "n609",
+                "n610"
+            ],
+            "zone": "Secteur Sud-Est"
+        },
+        "p673": {
+            "nodes": [
+                "n183",
+                "n673"
+            ],
+            "zone": "Sud-Centrale"
+        },
+        "p810": {
+            "nodes": [
+                "n716",
+                "n717"
+            ],
+            "zone": "Sud P\u00e9riph\u00e9rique"
+        },
+        "p866": {
+            "nodes": [
+                "n767",
+                "n768"
+            ],
+            "zone": "Extr\u00e9mit\u00e9 Sud"
+        }
+    }
+}
