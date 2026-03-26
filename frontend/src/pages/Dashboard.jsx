@@ -8,33 +8,33 @@ export default function Dashboard() {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  // Configuration des KPIs avec les nouvelles descriptions et suppression des trends
+  // MISE À JOUR : Valeurs réelles issues du rapport de classification (Zone Fuite)
   const modelKPIs = [
     { 
       title: "Accuracy", 
-      value: "99.2%", 
-      subText: "Taux global de prédictions correctes",
+      value: "96%", 
+      subText: "Taux global de prédictions exactes",
       icon: <Target size={24} className="text-cyan-600" />, 
       bgBase: "bg-cyan-50",
     },
     { 
       title: "Precision", 
-      value: "98.7%", 
-      subText: "Fiabilité des alertes de fuite",
+      value: "94%", 
+      subText: "Fiabilité des alertes (classe Fuite)",
       icon: <TrendingUp size={24} className="text-cyan-600" />, 
       bgBase: "bg-cyan-50",
     },
     { 
       title: "Recall", 
-      value: "97.9%", 
-      subText: "Capacité à détecter les fuites réelles",
+      value: "96%", 
+      subText: "Sensibilité de détection des fuites",
       icon: <Activity size={24} className="text-cyan-600" />, 
       bgBase: "bg-cyan-50",
     },
     { 
       title: "F1-Score", 
-      value: "0.98", 
-      subText: "Équilibre entre détection et fiabilité",
+      value: "0.95", 
+      subText: "Moyenne harmonique de performance",
       icon: <Zap size={24} className="text-cyan-600" />, 
       bgBase: "bg-cyan-50",
     },
@@ -64,6 +64,7 @@ export default function Dashboard() {
       if (!response.ok) throw new Error("Erreur lors de l'analyse.");
       const data = await response.json();
       
+      // On passe les données au composant Results
       navigate('/results', { state: { analysisData: data } });
 
     } catch (err) {
@@ -77,14 +78,15 @@ export default function Dashboard() {
   return (
     <div className="max-w-7xl mx-auto space-y-10 animate-fade-in pb-12 pt-8 px-4">
       
-      {/* HEADER: Titre modifié, gras, taille moyenne */}
+      {/* HEADER */}
       <div className="mb-2">
         <h2 className="text-2xl font-bold text-slate-900 tracking-tight">
-          Performances du Aqualeak et prédiction
+          Performances du moteur AquaLeak AI
         </h2>
+        <p className="text-slate-500 text-sm mt-1">Modèle LSTM + Topology Embedding | Seuil optimal : 0.732</p>
       </div>
 
-      {/* KPI CARDS: Plus de clic, effet hover doux uniquement */}
+      {/* KPI CARDS */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {modelKPIs.map((kpi, index) => (
           <div 
@@ -96,22 +98,17 @@ export default function Dashboard() {
               flex flex-col justify-between h-full
             "
           >
-            {/* Ligne du haut: Titre à gauche, Icone à droite */}
             <div className="flex justify-between items-start mb-4">
               <span className="text-lg font-semibold text-slate-700">{kpi.title}</span>
-              
-              {/* Icône ronde */}
               <div className={`w-12 h-12 flex items-center justify-center rounded-full ${kpi.bgBase}`}>
                 {kpi.icon}
               </div>
             </div>
             
-            {/* Valeur et Description */}
             <div className="space-y-3">
               <div className="text-4xl font-bold text-slate-800 tracking-tight">
                 {kpi.value}
               </div>
-              
               <div className="text-sm text-slate-500 font-medium">
                 {kpi.subText}
               </div>
@@ -125,7 +122,7 @@ export default function Dashboard() {
         
         <h2 className="text-xl font-semibold text-slate-800 mb-8 flex items-center gap-3">
           <UploadCloud className="text-cyan-500" size={28} />
-          Lancer une nouvelle analyse
+          Lancer une nouvelle analyse prédictive
         </h2>
 
         {/* Zone Upload */}
@@ -144,10 +141,10 @@ export default function Dashboard() {
             </div>
             <div className="space-y-2">
               <p className="text-xl font-semibold text-slate-700 group-hover:text-cyan-600 transition-colors">
-                {file ? file.name : "Cliquez pour uploader un fichier"}
+                {file ? file.name : "Cliquez pour uploader les données capteurs"}
               </p>
               <p className="text-sm font-medium text-slate-400">
-                Format supporté : CSV, Excel, json
+                Formats acceptés : CSV (historique), Excel ou JSON
               </p>
             </div>
           </label>
@@ -176,12 +173,12 @@ export default function Dashboard() {
             {loading ? (
               <>
                 <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                Traitement...
+                Analyse en cours...
               </>
             ) : (
               <>
                 <Activity size={22} />
-                Lancer la Prédiction
+                Prédire les fuites
               </>
             )}
           </button>
