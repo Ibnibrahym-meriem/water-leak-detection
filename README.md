@@ -68,6 +68,7 @@ npm install
 npm run dev
 L'interface sera accessible sur : http://localhost:5173
 
+
 🧠 Méthodologie du Modèle
 Le modèle traite des séquences de 24 heures (échantillonnage toutes les 5 min) :
 
