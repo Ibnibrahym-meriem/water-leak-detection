@@ -52,7 +52,7 @@ Le système combine un modèle de Deep Learning hybride (**LSTM + Topology Embed
 | 🏛️ **Université** | Université Abdelmalek Essaadi, Maroc |
 | 📚 **Programme** | Master Artificial Intelligence & Data Science (AISD) |
 | 👩‍💻 **Réalisé par** | Meriem Ibnibrahym |
-| 📅 **Année** | 2024 — 2025 |
+| 📅 **Année** | 2025 — 2026 |
 
 ---
 
