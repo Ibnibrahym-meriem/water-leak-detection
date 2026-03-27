@@ -25,7 +25,7 @@
 > L'article complet décrivant l'architecture, la méthodologie et les résultats expérimentaux est disponible ici :
 
 <p align="center">
-  <a href="https://drive.google.com/file/d/1LAE3xmYE72jkt15aVRHPNt0HFZN8xSma/view?usp=sharing">
+  <a href="https://drive.google.com/file/d/1-ZQ1UPI_Ky_LFXhm8v7u4JSuYpcjkQqT/view?usp=sharing">
     <img src="https://img.shields.io/badge/📄 Lire l'article scientifique-4285F4?style=for-the-badge&logo=google-drive&logoColor=white"/>
   </a>
 </p>
@@ -349,7 +349,7 @@ Le fichier doit respecter le format BattLeDIM :
 
 > Retrouvez la méthodologie complète, les équations du modèle et l'analyse des résultats dans notre article :
 
-**[📖 Détection des Pertes d'Eau dans les Réseaux de Distribution Urbaine par Apprentissage Profond Hybride LSTM & Topology Embedding](https://drive.google.com/file/d/1LAE3xmYE72jkt15aVRHPNt0HFZN8xSma/view?usp=sharing)**
+**[📖 Détection des Pertes d'Eau dans les Réseaux de Distribution Urbaine par Apprentissage Profond Hybride LSTM & Topology Embedding](https://drive.google.com/file/d/1-ZQ1UPI_Ky_LFXhm8v7u4JSuYpcjkQqT/view?usp=sharing)**
 
 ---
 
