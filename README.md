@@ -52,7 +52,7 @@ Le système combine un modèle de Deep Learning hybride (**LSTM + Topology Embed
 | 🏛️ **Université** | Université Abdelmalek Essaadi, Maroc |
 | 📚 **Programme** | Master Artificial Intelligence & Data Science (AISD) |
 | 👩‍💻 **Réalisé par** | Meriem Ibnibrahym |
-| 📅 **Année** | 2025 — 2026 |
+| 📅 **Année** | 2026 |
 
 ---
 
@@ -355,5 +355,5 @@ Le fichier doit respecter le format BattLeDIM :
 
 <p align="center">
   <b>💧 Sauvons l'eau, une prédiction à la fois.</b><br/>
-  <sub>Meriem Ibnibrahym · Master AISD · FST Tanger · 2025</sub>
+  <sub>Meriem Ibnibrahym · Master AISD · FST Tanger · 2026</sub>
 </p>
