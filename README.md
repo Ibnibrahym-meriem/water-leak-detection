@@ -49,7 +49,7 @@ Le système combine un modèle de Deep Learning hybride (**LSTM + Topology Embed
 |:---|:---|
 | 🎓 **Encadrant** | Pr. Ezziyyani Mostafa |
 | 🏫 **Établissement** | Faculté des Sciences et Techniques de Tanger — FSTT |
-| 🏛️ **Université** | Université Abdelmalek Essaadi, Maroc |
+| 🏛️ **Université** | Université Abdelmalek Essaadi |
 | 📚 **Programme** | Master Artificial Intelligence & Data Science (AISD) |
 | 👩‍💻 **Réalisé par** | Meriem Ibnibrahym |
 | 📅 **Année** | 2026 |
