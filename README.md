@@ -20,18 +20,6 @@
 
 ---
 
-## 📄 Article Scientifique
-
-> L'article complet décrivant l'architecture, la méthodologie et les résultats expérimentaux est disponible ici :
-
-<p align="center">
-  <a href="https://drive.google.com/file/d/1-ZQ1UPI_Ky_LFXhm8v7u4JSuYpcjkQqT/view?usp=sharing">
-    <img src="https://img.shields.io/badge/📄 Lire l'article scientifique-4285F4?style=for-the-badge&logo=google-drive&logoColor=white"/>
-  </a>
-</p>
-
----
-
 ## 📌 Présentation
 
 **AquaLeakDetector** est une solution complète de surveillance intelligente des réseaux de distribution d'eau potable, développée dans le cadre du Master **Artificial Intelligence & Data Science (AISD)** à la **Faculté des Sciences et Techniques de Tanger (FSTT)**.
